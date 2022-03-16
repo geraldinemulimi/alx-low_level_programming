@@ -1,47 +1,67 @@
-/*
- * File: 100-times_table.c
- * Auth: Samuel Kioko
- */
+#include <stdio.h>
 #include "main.h"
+
+void putchar_many(int);
+
 /**
- * print_times_table - prints the n times table starting with 0
- * @n: The value of the times table to be printed.
+ * print_times_table - prints the timetable of integer n
+ * @n: number to generate the times table
  */
 void print_times_table(int n)
 {
-	int num, mult, prod;
-
-	if (n >= 0 && n <= 15)
+	if (n >=  0 && n <= 15)
 	{
-		for (num = 0; num <= n; num++)
+		int a, b;
+
+		for (a = 0; a <= n; a++)
 		{
-			_putchar('0');
-
-			for (mult = 1; mult <= n; mult++)
+			for (b = 0; b <= n; b++)
 			{
-				_putchar(',');
-				_putchar(' ');
-
-				prod = num * mult;
-
-           			if (prod <= 99)
-					_putchar(' ');
-				if (prod <= 9)
-					_putchar(' ');
-
-				if (prod >= 100)
+				if (b == 0)
+					putchar(b + '0');
+				else if ((a * b) < 10)
 				{
-					_putchar((prod / 100) + '0');
-					_putchar(((prod / 10)) % 10 + '0');
+					putchar(' ');
+					putchar(' ');
+					putchar(' ');
+					putchar((a * b) % 10 + '0');
 				}
-				else if (prod <= 99 && prod >= 10)
+
+				else if ((a * b) < 100)
 				{
-					_putchar((prod / 10) + '0');
+					putchar(' ');
+					putchar(' ');
+					putchar((a * b) / 10 + '0');
+					putchar((a * b) % 10 + '0');
 				}
-				_putchar((prod % 10) + '0');
+				else
+				{
+					putchar(' ');
+					putchar_many(a * b);
+				}
+
+				if (b != n)
+					putchar(',');
 			}
-			_putchar('\n');
+			putchar('\n');
 		}
 	}
 }
 
+/**
+ * putchar_many - putchar a number with more than 2 digits
+ * @x: the number with more than 2 digits
+ */
+void putchar_many(int x)
+{
+	if (x < 0)
+	{
+		putchar('-');
+		x = -x;
+	}
+
+	if (x / 10)
+		putchar_many(x / 10);
+
+	putchar(x % 10 + '0');
+}
