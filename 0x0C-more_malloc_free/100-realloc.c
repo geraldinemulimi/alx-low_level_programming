@@ -36,7 +36,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	if (new_size < old_size)
 	{
 		for (c = 0; c < new_size; c++)
-			a[c] = b[c]
+			a[c] = b[c];
 	}
 
 	if (new_size > old_size)
